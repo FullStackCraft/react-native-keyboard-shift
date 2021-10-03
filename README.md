@@ -1,6 +1,6 @@
 # react-native-keyboard-shift
 
-[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/princefishthrower/react-native-keyboard-shift/blob/master/LICENSE) [![npm version](https://img.shields.io/npm/v/react-native-keyboard-shift.svg?style=flat)](https://www.npmjs.com/package/react-native-keyboard-shift) ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/FullStackCraft/react-native-keyboard-shift/blob/master/LICENSE) [![npm version](https://img.shields.io/npm/v/react-native-keyboard-shift.svg?style=flat)](https://www.npmjs.com/package/@fullstackcraft/react-native-keyboard-shift) ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)
 
 # Example
 
@@ -26,13 +26,21 @@ cd react-native-keyboard-shift/example
 npm install
 ```
 
-4. Start Android
+4. Start Metro
+
+```
+npm start
+```
+
+5. Start Android
 
 ```
 npm run android
 ```
 
-or iOS:
+ * OR *
+
+iOS:
 
 ```
 npm run ios

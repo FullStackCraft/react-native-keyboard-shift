@@ -1,6 +1,6 @@
 {
   "name": "@fullstackcraft/react-native-keyboard-shift",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A 2020s compatible keyboard avoiding view for Android and iOS that just works.",
   "main": "index.js",
   "scripts": {
