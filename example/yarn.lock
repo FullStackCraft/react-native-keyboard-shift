@@ -768,10 +768,10 @@
     "minimatch" "^3.0.4"
     "strip-json-comments" "^3.1.1"
 
-"@fullstackcraft/react-native-keyboard-shift@^1.0.0":
-  "integrity" "sha512-Bg7RTPpNkCGri378lcBTWT3GXyZh/LuPWAzN0rBN/JzAh8ibxxdZnEaCrm+Ro/G8MKwoo2AKucBLVZIVN3khzQ=="
-  "resolved" "https://registry.npmjs.org/@fullstackcraft/react-native-keyboard-shift/-/react-native-keyboard-shift-1.0.0.tgz"
-  "version" "1.0.0"
+"@fullstackcraft/react-native-keyboard-shift@^1.0.1":
+  "integrity" "sha512-VWN4Az/qrVCJ2oh+SW7qfL2/HN8OXmlLss8ATcQgzNePbY0lK04Jbvu7CHbyLNhDyGS5o4vR+YA/hPrW7jBleg=="
+  "resolved" "https://registry.npmjs.org/@fullstackcraft/react-native-keyboard-shift/-/react-native-keyboard-shift-1.0.1.tgz"
+  "version" "1.0.1"
 
 "@hapi/hoek@^9.0.0":
   "integrity" "sha512-gfta+H8aziZsm8pZa0vj04KO6biEiisppNgA1kbJvFrrWu9Vm7eaUEy76DIxsuTaWvti5fkJVhllWc6ZTE+Mdw=="

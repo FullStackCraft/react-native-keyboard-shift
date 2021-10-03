@@ -32,17 +32,11 @@ npm install
 npm start
 ```
 
-5. Start Android
+5. Start Android or iOS
 
-```
+```bash
 npm run android
-```
-
- * OR *
-
-iOS:
-
-```
+# -or- iOS
 npm run ios
 ```
 

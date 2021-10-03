@@ -17,7 +17,7 @@
     "forceConsistentCasingInFileNames": true,
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
-    "types": ["react", "react-native"]
+    "types": ["react", "react-native"],
   },
   "files": [
     "src/index.d.ts"
