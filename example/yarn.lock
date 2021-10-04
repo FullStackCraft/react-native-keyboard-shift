@@ -768,13 +768,15 @@
     "minimatch" "^3.0.4"
     "strip-json-comments" "^3.1.1"
 
-"@fullstackcraft/react-native-keyboard-shift@^1.1.2":
-  "integrity" "sha512-iH6TNZEe05/hW9kxN/qwUfdP6Gch8n0Mg7yhV5oDRN7GNDRLDRM5+3Jq2cXhQ7ZCv5RN2kZoDmeR8sDWnQPdUA=="
-  "resolved" "https://registry.npmjs.org/@fullstackcraft/react-native-keyboard-shift/-/react-native-keyboard-shift-1.1.2.tgz"
-  "version" "1.1.2"
+"@fullstackcraft/react-native-keyboard-shift@^1.1.3":
+  "integrity" "sha512-tTny13MfQ7CJ+KLWcrXKhcgEM0puyviFpbsWg3CrCa3KInk7HDK57VHyHU8MqSoBS3vIkB6+GLSh2bROx0MyxQ=="
+  "resolved" "https://registry.npmjs.org/@fullstackcraft/react-native-keyboard-shift/-/react-native-keyboard-shift-1.1.3.tgz"
+  "version" "1.1.3"
   dependencies:
     "@react-native-community/hooks" "^2.6.0"
     "@react-navigation/elements" "^1.1.2"
+    "react" ">= 17.0.2"
+    "react-native" ">=0.64.0"
 
 "@hapi/hoek@^9.0.0":
   "integrity" "sha512-gfta+H8aziZsm8pZa0vj04KO6biEiisppNgA1kbJvFrrWu9Vm7eaUEy76DIxsuTaWvti5fkJVhllWc6ZTE+Mdw=="
@@ -1355,9 +1357,8 @@
     "@types/react" "*"
 
 "@types/react@*":
-  "integrity" "sha512-MXxuXrH2xOcv5cp/su4oz69dNQnSA90JjFw5HBd5wifw6Ihi94j7dRJm7qNsB30tnruXSCPc9qmlhGop4nh9Hw=="
-  "resolved" "https://registry.npmjs.org/@types/react/-/react-17.0.26.tgz"
-  "version" "17.0.26"
+  "integrity" "sha512-zgiJwtsggVGtr53MndV7jfiUESTqrbxOcBvwfe6KS/9bzaVPCTDieTWnFNecVNx6EAaapg5xsLLWFfHHR437AA=="
+  "version" "17.0.27"
   dependencies:
     "@types/prop-types" "*"
     "@types/scheduler" "*"
