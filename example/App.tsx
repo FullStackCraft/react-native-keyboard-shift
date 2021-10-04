@@ -1,15 +1,14 @@
 import React from 'react';
-import {SafeAreaView, StatusBar, TextInput} from 'react-native';
+import {TextInput, SafeAreaView} from 'react-native';
 import KeyboardShift from '@fullstackcraft/react-native-keyboard-shift';
 
 const App = () => {
   return (
-    <KeyboardShift>
-      <SafeAreaView>
-        <StatusBar barStyle={'light-content'} />
+    <SafeAreaView>
+      <KeyboardShift>
         <TextInput placeholder="I'm a TextInput - tap me!" />
-      </SafeAreaView>
-    </KeyboardShift>
+      </KeyboardShift>
+    </SafeAreaView>
   );
 };
 

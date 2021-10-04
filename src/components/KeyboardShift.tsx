@@ -1,16 +1,26 @@
 import React, { useEffect, useState } from 'react';
-import { Platform, Animated, Dimensions, Keyboard, KeyboardAvoidingView, StyleSheet, TextInput } from 'react-native';
+import {
+  Animated,
+  Dimensions,
+  Keyboard,
+  KeyboardAvoidingView,
+  Platform,
+  StyleSheet,
+  TextInput,
+  ViewProps,
+} from 'react-native';
 import { useKeyboard } from '@react-native-community/hooks';
 
-interface Props {
+interface Props extends ViewProps {
   hasHeader?: boolean;
   headerOffset?: number;
   children: any;
 }
 
-export default function KeyboardShift (props: Props) {
-  const [shift] = useState(new Animated.Value(0))
-  const keyboard = useKeyboard()
+export default function KeyboardShift(props: Props) {
+  const { children, hasHeader, headerOffset, style, ...others } = props;
+  const [shift] = useState(new Animated.Value(0));
+  const keyboard = useKeyboard();
 
   // On mount, add keyboard show and hide listeners
   // On unmount, remove them
@@ -20,49 +30,39 @@ export default function KeyboardShift (props: Props) {
     return () => {
       Keyboard.removeAllListeners('keyboardDidShow');
       Keyboard.removeAllListeners('keyboardDidHide');
-    }
-  }, [])
+    };
+  }, []);
 
   const handleKeyboardDidShow = () => {
     const { height: windowHeight } = Dimensions.get('window');
     const keyboardHeight = keyboard.keyboardHeight;
     const currentlyFocusedInputRef = TextInput.State.currentlyFocusedInput();
     currentlyFocusedInputRef.measure((_x, _y, _width, height, _pageX, pageY) => {
-      const fieldHeight = height;
-      const fieldTop = pageY;
-      const gap = (windowHeight - keyboardHeight) - (fieldTop + fieldHeight);
+      const gap = windowHeight - keyboardHeight - (pageY + height);
       if (gap >= 0) {
         return;
       }
-      Animated.timing(
-        shift,
-        {
-          toValue: gap,
-          duration: 1000,
-          useNativeDriver: true,
-        }
-      ).start();
-    })
-  }
-
-  const handleKeyboardDidHide = () => {
-    Animated.timing(
-      shift,
-      {
-        toValue: 0,
+      Animated.timing(shift, {
+        toValue: gap,
         duration: 1000,
         useNativeDriver: true,
-      }
-    ).start();
-  }
+      }).start();
+    });
+  };
 
-  const { children, hasHeader, headerOffset } = props;
+  const handleKeyboardDidHide = () => {
+    Animated.timing(shift, {
+      toValue: 0,
+      duration: 1000,
+      useNativeDriver: true,
+    }).start();
+  };
 
   // Android: we need an animated view since the keyboard style can vary widely
   // And React Native's KeyboardAvoidingView isn't always reliable
   if (Platform.OS === 'android') {
     return (
-      <Animated.View style={[styles.container, { transform: [{translateY: shift}] }]}>
+      <Animated.View style={[styles.container, { transform: [{ translateY: shift }] }, style]} {...others}>
         {children}
       </Animated.View>
     );
@@ -76,22 +76,22 @@ export default function KeyboardShift (props: Props) {
     if (headerOffset) {
       headerHeight = headerOffset;
     } else {
-      const {useHeaderHeight} = require('@react-navigation/elements');
+      const { useHeaderHeight } = require('@react-navigation/elements');
       headerHeight = useHeaderHeight();
     }
   }
   return (
     <KeyboardAvoidingView
       keyboardVerticalOffset={headerHeight}
-      style={styles.container}
-      behavior={'padding'}>
+      style={[styles.container, style]}
+      behavior={'padding'}
+      {...others}
+    >
       {children}
     </KeyboardAvoidingView>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1
-  }
+  container: {},
 });

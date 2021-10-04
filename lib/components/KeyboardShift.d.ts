@@ -1,5 +1,6 @@
 /// <reference types="react" />
-interface Props {
+import { ViewProps } from 'react-native';
+interface Props extends ViewProps {
     hasHeader?: boolean;
     headerOffset?: number;
     children: any;
