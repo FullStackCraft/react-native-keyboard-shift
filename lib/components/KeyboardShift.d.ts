@@ -1,2 +1,6 @@
-import { PropsWithChildren } from 'react';
-export default function KeyboardShift(props: PropsWithChildren<{}>): JSX.Element;
+interface Props {
+  hasHeader?: boolean;
+  headerOffset?: number;
+  children: any;
+}
+export default function KeyboardShift(props: Props): JSX.Element;
