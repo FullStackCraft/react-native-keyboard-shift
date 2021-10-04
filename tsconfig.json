@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "target": "es2017",
+    "module": "commonjs",
     "lib": ["es6", "es2016"],
     "jsx": "react-native",
     "strict": true,
@@ -18,10 +19,8 @@
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
     "types": ["react", "react-native"],
+    "outDir": "./lib"
   },
-  "files": [
-    "src/index.d.ts"
-  ],
-  "include": ["src/index.ts"],
-  "exclude": ["node_modules", "dist", "example"]
+  "include": ["src"],
+  "exclude": ["node_modules", "**/__tests__/*"]
 }
