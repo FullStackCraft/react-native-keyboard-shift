@@ -1,9 +1,14 @@
-import React, { PropsWithChildren, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Platform, Animated, Dimensions, Keyboard, KeyboardAvoidingView, StyleSheet, TextInput } from 'react-native';
-import {useHeaderHeight} from '@react-navigation/elements';
 import { useKeyboard } from '@react-native-community/hooks';
 
-export default function KeyboardShift (props: PropsWithChildren<{}>) {
+interface Props {
+  hasHeader?: boolean;
+  headerOffset?: number;
+  children: any;
+}
+
+export default function KeyboardShift (props: Props) {
   const [shift] = useState(new Animated.Value(0))
   const keyboard = useKeyboard()
 
@@ -51,7 +56,7 @@ export default function KeyboardShift (props: PropsWithChildren<{}>) {
     ).start();
   }
 
-  const { children } = props;
+  const { children, hasHeader, headerOffset } = props;
 
   // Android: we need an animated view since the keyboard style can vary widely
   // And React Native's KeyboardAvoidingView isn't always reliable
@@ -65,7 +70,16 @@ export default function KeyboardShift (props: PropsWithChildren<{}>) {
 
   // iOS: React Native's KeyboardAvoidingView with header offset and
   // behavior 'padding' works fine on all ios devices (and keyboard types)
-  const headerHeight = useHeaderHeight();
+  let headerHeight = 0;
+
+  if (hasHeader) {
+    if (headerOffset) {
+      headerHeight = headerOffset;
+    } else {
+      const {useHeaderHeight} = require('@react-navigation/elements');
+      headerHeight = useHeaderHeight();
+    }
+  }
   return (
     <KeyboardAvoidingView
       keyboardVerticalOffset={headerHeight}
