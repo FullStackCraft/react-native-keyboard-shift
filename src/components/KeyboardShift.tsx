@@ -1,24 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import {
-  Animated,
-  Dimensions,
-  Keyboard,
-  KeyboardAvoidingView,
-  Platform,
-  StyleSheet,
-  TextInput,
-  ViewProps,
-} from 'react-native';
+import { Animated, Dimensions, Keyboard, KeyboardAvoidingView, Platform, TextInput, ViewProps } from 'react-native';
 import { useKeyboard } from '@react-native-community/hooks';
 
 interface Props extends ViewProps {
-  hasHeader?: boolean;
   headerOffset?: number;
   children: any;
 }
 
 export default function KeyboardShift(props: Props) {
-  const { children, hasHeader, headerOffset, style, ...others } = props;
+  const { children, headerOffset, style, ...others } = props;
   const [shift] = useState(new Animated.Value(0));
   const keyboard = useKeyboard();
 
@@ -62,7 +52,7 @@ export default function KeyboardShift(props: Props) {
   // And React Native's KeyboardAvoidingView isn't always reliable
   if (Platform.OS === 'android') {
     return (
-      <Animated.View style={[styles.container, { transform: [{ translateY: shift }] }, style]} {...others}>
+      <Animated.View style={[{ transform: [{ translateY: shift }] }, style]} {...others}>
         {children}
       </Animated.View>
     );
@@ -70,28 +60,11 @@ export default function KeyboardShift(props: Props) {
 
   // iOS: React Native's KeyboardAvoidingView with header offset and
   // behavior 'padding' works fine on all ios devices (and keyboard types)
-  let headerHeight = 0;
+  const headerHeight = headerOffset ? headerOffset : 0;
 
-  if (hasHeader) {
-    if (headerOffset) {
-      headerHeight = headerOffset;
-    } else {
-      const { useHeaderHeight } = require('@react-navigation/elements');
-      headerHeight = useHeaderHeight();
-    }
-  }
   return (
-    <KeyboardAvoidingView
-      keyboardVerticalOffset={headerHeight}
-      style={[styles.container, style]}
-      behavior={'padding'}
-      {...others}
-    >
+    <KeyboardAvoidingView keyboardVerticalOffset={headerHeight} style={style} behavior={'padding'} {...others}>
       {children}
     </KeyboardAvoidingView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {},
-});
