@@ -15,9 +15,6 @@
     "version": "npm run format && git add -A src",
     "postversion": "git push && git push --tags"
   },
-  "dependencies": {
-    "@react-native-community/hooks": "^2.6.0"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/FullStackCraft/react-native-keyboard-shift.git"
