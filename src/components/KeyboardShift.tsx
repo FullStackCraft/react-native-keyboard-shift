@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Animated, Dimensions, Keyboard, KeyboardAvoidingView, Platform, TextInput, ViewProps } from 'react-native';
-import { useKeyboard } from '@react-native-community/hooks';
+import { Animated, Dimensions, Keyboard, KeyboardAvoidingView, KeyboardEvent, Platform, TextInput, ViewProps } from 'react-native';
 
 interface Props extends ViewProps {
   headerOffset?: number;
@@ -10,28 +9,28 @@ interface Props extends ViewProps {
 export default function KeyboardShift(props: Props) {
   const { children, headerOffset, style, ...others } = props;
   const [shift] = useState(new Animated.Value(0));
-  const keyboard = useKeyboard();
 
-  // On mount, add keyboard show and hide listeners
-  // On unmount, remove them
   useEffect(() => {
-    Keyboard.addListener('keyboardDidShow', handleKeyboardDidShow);
-    Keyboard.addListener('keyboardDidHide', handleKeyboardDidHide);
-    return () => {
-      Keyboard.removeAllListeners('keyboardDidShow');
-      Keyboard.removeAllListeners('keyboardDidHide');
-    };
+    const sub = Keyboard.addListener('keyboardDidShow', handleKeyboardDidShow);
+    return () => sub.remove();
   }, []);
 
-  const handleKeyboardDidShow = () => {
+  useEffect(() => {
+    const sub = Keyboard.addListener('keyboardDidHide', handleKeyboardDidHide);
+    return () => sub.remove();
+  }, []);
+
+  const handleKeyboardDidShow = (e: KeyboardEvent) => {
     const { height: windowHeight } = Dimensions.get('window');
-    const keyboardHeight = keyboard.keyboardHeight;
+    const keyboardHeight = e.endCoordinates.height;
+
     const currentlyFocusedInputRef = TextInput.State.currentlyFocusedInput();
     currentlyFocusedInputRef.measure((_x, _y, _width, height, _pageX, pageY) => {
       const gap = windowHeight - keyboardHeight - (pageY + height);
       if (gap >= 0) {
         return;
       }
+
       Animated.timing(shift, {
         toValue: gap,
         duration: 1000,
@@ -60,7 +59,7 @@ export default function KeyboardShift(props: Props) {
 
   // iOS: React Native's KeyboardAvoidingView with header offset and
   // behavior 'padding' works fine on all ios devices (and keyboard types)
-  const headerHeight = headerOffset ? headerOffset : 0;
+  const headerHeight = headerOffset || 0;
 
   return (
     <KeyboardAvoidingView keyboardVerticalOffset={headerHeight} style={style} behavior={'padding'} {...others}>
